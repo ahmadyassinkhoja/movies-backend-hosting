@@ -18,6 +18,15 @@ Posts = "posts"
 const mongoUrl = 'mongodb://ahmadyassin:12345ahmad@ds145463.mlab.com:45463/movies'
 
 // let Movies
+// for google auth and allowing passing headers from server to app
+
+app.all("/*", function(req, res, next){
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    next();
+});
+
 
 // Connect to the database before starting the application server.
 mongodb.MongoClient.connect(mongoUrl, function (err, database) {
@@ -36,18 +45,11 @@ mongodb.MongoClient.connect(mongoUrl, function (err, database) {
 
 })
 
-  // for parsing and delevering the json
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({extended: true}) );
 
-  // for google auth and allowing passing headers from server to app
-  app.all("/*", function(req, res, next){
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    next();
-  });
 
+// for parsing and delevering the json
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}) );
 
   
 app.get('/', (req, res) => {
