@@ -21,6 +21,7 @@ const mongoUrl = 'mongodb://ahmadyassin:12345ahmad@ds145463.mlab.com:45463/movie
 // for google auth and allowing passing headers from server to app
 
 app.all("/*", function(req, res, next){
+    res.header('Access-Control-Allow-Origin', 'https://inspiring-kirch-e5ae61.netlify.com/');
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
